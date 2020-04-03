@@ -37,7 +37,7 @@ class ConnectController extends Controller
     	else:
 
     		if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], true)):
-    			return redirect('/');
+    			return redirect('/admin');
     		else:
     			return back()->with('message', 'Correo electronico o contraseña errónea')->with('typealert', 'danger');
     		endif;

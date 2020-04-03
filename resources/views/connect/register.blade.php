@@ -59,7 +59,7 @@
 
 	 	@if(Session::has('message'))
 			<div class="container">
-				<div class="mtop16 alert alert-{{ Session::get('typealert') }}" style="display:none;">
+				<div class=" alert alert-success {{ Session::get('typealert') }} mtop16" style="display:none;">
 					{{ Session::get('message') }}
 					@if ($errors->any())
 					<ul>
