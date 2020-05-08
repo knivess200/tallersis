@@ -39,7 +39,7 @@
 					 		{!! Form::text('lastname', $users->lastname, ['class' => 'form-control', 'required']) !!}
 					 	</div>
 
-<!--
+
 					 	<label for="email" class="mtop16">Correo electrónico:</label>
 					 	<div class="input-group">
 					 		 		<div class="input-group-prepend">
@@ -47,7 +47,7 @@
 					 		</div>
 					 		{!! Form::email('email', $users->email, ['class' => 'form-control', 'required']) !!}
 					 	</div>
--->
+
 					 	<label for="password" class="mtop16">Password:</label>
 					 	<div class="input-group">
 					 		 		<div class="input-group-prepend">

@@ -1,13 +1,13 @@
 @extends('admin.master')
-@section('title' , 'Agregar Producto' )
+@section('title' , 'Agregar Servicio' )
 
 @section('breadcrumb')
 	<li class="breadcrumb-item">
-		<a href="{{url('/admin/products')}}"><i class="fas fa-boxes"></i> Productos</a>
+		<a href="{{url('/admin/products')}}"><i class="fas fa-boxes"></i> Servicio</a>
 		
 	</li>
 	<li class="breadcrumb-item">
-		<a href="{{url('/admin/products/add')}}"><i class="fas fa-plus"></i> Agregar Producto</a>
+		<a href="{{url('/admin/products/add')}}"><i class="fas fa-plus"></i> Agregar Servicio</a>
 		
 	</li>
 @endsection
@@ -17,15 +17,15 @@
 <div class="container-fluid">
 	<div class="panel shadow">
 		<div class="header">
-			<h2 class="title"><i class="fas fa-plus"></i> Agregar Producto</h2>			
+			<h2 class="title"><i class="fas fa-plus"></i> Agregar Servicio</h2>			
 		</div>
 		
 		<div class="inside">
-			{!! Form::open(['url' => '/admin/product/add']) !!}
+			{!! Form::open(['url' => '/admin/product/add', 'files' => true]) !!}
 			<div class="row">
 
 				<div class="col-md-6">
-					<label for="title">Nombre del Producto:</label>
+					<label for="title">Nombre del Servicio:</label>
 					<div class="input-group ">
 						<div class="input-group-prepend">
 					    	<span class="input-group-text" id="basic-addon1"><i class="far fa-keyboard"></i>
@@ -49,7 +49,7 @@
 				<div class="col-md-3">
 					<label for="title">Imagen Destaca:</label>
 					<div class="custom-file">
-					{!! Form::file('img', ['class' => 'custom-file-input', 'id' => 'customFile'])!!}
+					{!! Form::file('img', ['class' => 'custom-file-input', 'id' => 'customFile', 'accept' => 'image/' ])!!}
 					<label class="custom-file-label" for="customFile">Choose file</label>
 					</div>
 				</div>

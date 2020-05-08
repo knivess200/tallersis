@@ -1,0 +1,55 @@
+COMANDOS:
+
+Sonido aumentado con shift:
+
+alias +walkvol "incrementvar volume 0 1 0.5;+speed" 
+alias -walkvol "incrementvar volume 0 1 -0.5;-speed"    
+bind shift +walkvol
+
+Lineas de smoke:
+
+bind KEY "toggle cl_crosshairsize 1000 tamaño"
+
+Limpiar todos los "decals":
+
+bind x r_cleardecals 
+
+Quitar y poner el audio del equipo:
+
+bind ctrl "voice_enable 0; say_team Voice Disabled, I can't hear anyone now" 
+bind Alt "voice_enable 1; say_team Voice Enabled, I hear now"
+
+Cambiar de mano el arma:
+
+bindToggle z "cl_righthand"
+
+
+Quitar el bobing:
+
+cl_viewmodel_shift_left_amt "0.500000" 
+cl_viewmodel_shift_right_amt "0.250000" 
+viewmodel_fov "61.000000" 
+viewmodel_offset_x "2.5" 
+viewmodel_offset_y "2.0" 
+viewmodel_offset_z "-1.000000" 
+viewmodel_presetpos "0" 
+viewmodel_recoil "1" 
+cl_bob_lower_amt "5.000000" 
+cl_bobamt_lat "0.100000" 
+cl_bobamt_vert "0.100000" 
+cl_bobcycle "0.98" 
+
+Ver a tu equipo y sus armas a través de las paredes:
+
++cl_show_team_equipment & cl_teamid_overhead_always 1
+
+
+Maps: 
+Aim Botz: https://steamcommunity.com/sharedfile...
+Fast Aim: https://steamcommunity.com/sharedfile...
+
+
+
+https://www.youtube.com/redirect?q=https%3A%2F%2Fsteamcommunity.com%2Fsharedfiles%2Ffiledetails%2F%3Fid%3D243702660%26searchtext%3Daim%2Bbotz&redir_token=q1e5fOZhRgUQsPRaLwBKFj25Tz98MTU4ODIyODgxOUAxNTg4MTQyNDE5&v=2Os-3IEeeQc&event=video_description
+
+https://www.youtube.com/redirect?q=https%3A%2F%2Fsteamcommunity.com%2Fsharedfiles%2Ffiledetails%2F%3Fid%3D368026786%26searchtext%3Dfast%2Baim&redir_token=q1e5fOZhRgUQsPRaLwBKFj25Tz98MTU4ODIyODgxOUAxNTg4MTQyNDE5&v=2Os-3IEeeQc&event=video_description

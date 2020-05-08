@@ -2,7 +2,7 @@
 
 function getModulesArray(){
 	$a = [
-		'0' => 'Productos',
+		'0' => 'Servicios',//Productos
 		'1' => 'Blog'
 
 	];
