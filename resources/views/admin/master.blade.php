@@ -24,7 +24,7 @@
 
 
 	<script src="{{ url('/static/libs/ckeditor/ckeditor.js')}}"></script>
-	<script src="{{ url('/static/js/admin.js')}}"></script>
+	<script src="{{ url('/static/js/admin.js?v='.time())}}"></script>
 
 <script>
 	$(document).ready(function(){
