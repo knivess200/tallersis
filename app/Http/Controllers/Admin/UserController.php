@@ -27,9 +27,9 @@ class UserController extends Controller
 
 
     public function getUsersEdit($id){
-     	$users = User::find($id);
-     	$data = ['users' => $users];
-     	return view('admin.users.edit', $data);
+     	$u = User::findOrFail($id);
+     	$data = ['u' => $u];
+     	return view('admin.users.user_edit', $data);
      }
 
      public function postUsersEdit(Request $request, $id){

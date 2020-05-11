@@ -16,7 +16,7 @@ class ProductController extends Controller
     }
 
     public function getHome(){
-        $products = Product::with(['cat'])->orderBy('id', 'desc')->paginate(25);
+        $products = Product::with(['cat'])->orderBy('id', 'desc')->paginate(10);
         $data = ['products' => $products];
 
     	return view('admin.products.home', $data); 
@@ -113,6 +113,8 @@ class ProductController extends Controller
         else:    
         
             $product = Product::findOrFail($id);
+            $ipp = $product->file_path;
+            $ip = $product->image;
             $product->status = $request->input('status');
             $product->name = e($request->input('name'));
             
@@ -141,6 +143,8 @@ class ProductController extends Controller
                         $constraint->upsize();
                     });
                     $img->save($upload_path.'/'.$path.'/t_'.$filename);
+                    unlink($upload_path.'/'.$ipp.'/'.$ip);
+                    unlink($upload_path.'/'.$ipp.'/t_'.$ip);
                 endif;
                 return back()->with('message', 'Actualizado con exito')->with('typealert', 'success');
             endif;
