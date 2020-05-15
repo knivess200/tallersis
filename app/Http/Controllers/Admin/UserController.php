@@ -19,8 +19,12 @@ class UserController extends Controller
     	$this->middleware('auth');
     	$this->middleware('isadmin');
     }
-    public function getUsers(){
-    	$users = User::orderBy('id', 'Desc')->get();
+    public function getUsers($status){
+        if($status == 'all'):
+    	$users = User::orderBy('id', 'Desc')->paginate(2);
+    else:
+        $users = User::where('status', $status)->orderBy('id', 'Desc')->paginate(2);
+    endif;
     	$data = ['users' => $users];
     	return view('admin.users.home', $data); 
     }
@@ -32,20 +36,16 @@ class UserController extends Controller
      	return view('admin.users.user_edit', $data);
      }
 
-     public function postUsersEdit(Request $request, $id){
+     public function postUserEdit(Request $request, $id){
      	$rules = [
      		'name' => 'required',
     		'lastname' => 'required',
-    		'email' => 'required|email|unique:App\User,email',
     		'password' => 'required|min:8',
     		'cpassword' => 'required|min:8|same:password'
      	];
      	$messages = [
      		'name.required' => 'Su nombre es requerido.',
     		'lastname.required' => 'Su apellido es requerido.',
-    		'email.required' => 'Su correo electrónico es requerido.',
-    		'email.email' => 'El formato de su correo electrónico es invalido.',
-    		'email.unique' => 'Ya existe un usuario registrado con este correo electrónico.',
     		'password.required' => 'Por favor escriba una contraseña.',
     		'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
     		'cpassword.required' => 'Es necesario confirmar la contraseña.',
@@ -59,8 +59,7 @@ class UserController extends Controller
     	else:
     		$c = User::find($id);
     		$c->name = $request->input('name');
-    		$c->lastname = $request->input('lastname');
-    		$c->email = $request->input('email');
+    		$c->lastname = $request->input('lastname');    		
     		$c->password = Hash::make($request->input('password'));
     		if($c->save()):
     			return back()->with('message', 'Guardado con exito')->with('typealert', 'success');
@@ -68,10 +67,26 @@ class UserController extends Controller
     	endif;
      }
 
-     public function getUsersDelete($id){
+     public function getUserDelete($id){
      	$c = User::find($id);
      	if($c->delete()):
     			return back()->with('message', 'Borrado con exito')->with('typealert', 'success');
     		endif;
+     }
+
+     public function getUserBanned($id){
+
+        $u = User::findOrFail($id);
+        if($u->status == "100"):
+            $u->status = "1";
+            $msg= "Usuario activo nuevamente";
+        else:
+            $u->status = "100";
+            $msg = "Usuario suspendido con exito";
+        endif;
+
+        if($u->save()):
+            return back()->with('message', $msg)->with('typealert', 'success');
+        endif;
      }
 }

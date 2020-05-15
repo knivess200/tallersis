@@ -30,7 +30,7 @@
 			</li>
 
 			<li>
-				<a href="{{url('/admin/users')}}" class="lk-user_list lk-user_edit lk-user_delete"><i class="fas fa-user-friends"></i> Usuarios</a>
+				<a href="{{url('/admin/users/all')}}" class="lk-user_list lk-user_edit lk-user_delete"><i class="fas fa-user-friends"></i> Usuarios</a>
 			</li>
 		</ul>
 		

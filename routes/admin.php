@@ -3,11 +3,14 @@
 
 Route::prefix('/admin')->group(function(){
 	Route::get('/','Admin\DashboardController@getDashboard')->name('dashboard');
-	Route::get('/users','Admin\UserController@getUsers')->name('user_list');
+	
+	Route::get('/users/{status}','Admin\UserController@getUsers')->name('user_list');
 	// Usuarios/Editar
-	Route::get('/users/{id}/edit', 'Admin\UserController@getUsersEdit' )->name('user_edit');
-	Route::post('/users/{id}/edit', 'Admin\UserController@postUsersEdit' )->name('user_edit');
-	Route::get('/users/{id}/delete', 'Admin\UserController@getUsersDelete')->name('user_delete');
+	Route::get('/user/{id}/edit', 'Admin\UserController@getUsersEdit' )->name('user_edit');
+	Route::get('/user/{id}/banned', 'Admin\UserController@getUserBanned' )->name('user_banned');
+
+	Route::post('/user/{id}/edit', 'Admin\UserController@postUserEdit' )->name('user_edit');
+	Route::get('/user/{id}/delete', 'Admin\UserController@getUserDelete')->name('user_delete');
 
 	//Module Products
 	Route::get('/products', 'Admin\ProductController@getHome')->name('products');
