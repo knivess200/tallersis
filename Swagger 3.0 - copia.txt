@@ -1,0 +1,754 @@
+swagger: "2.0"
+info:
+  description: "Esta aplicacion es un sistema para el cuidado de niños "
+  version: "1.0.0"
+  title: "Tallersis-cuidado de niños"
+  termsOfService: "http://tallersis.com"
+  contact:
+    name: "Kevin Rubin de Celis" 
+    email: "knivess200@gmail.com"
+  
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "petstore.swagger.io"
+basePath: "/v2"
+tags:
+
+- name: "admin"
+  description: "Todo sobre el admin"
+  
+
+- name: "login"
+  description: "Para loguearse en el sistema"
+  
+- name: "register"
+  description: "Para registrarse en el sistema"
+- name: "logout"
+  description: "Para salir del sistema"
+  
+schemes:
+- "https"
+- "http"
+
+
+
+paths: 
+
+  /admin/users:
+    get:
+      tags:
+      - "admin"
+      summary: "mostrar todos los usuarios registrados"
+      description: ""
+      
+      responses:
+        200:
+          description: OK
+          
+  /admin/users/{id}/edit:
+    get:
+      tags:
+      - "admin"
+      summary: "El administrador puede editar un usuario por el id"
+      description: ""
+      operationId: "getUsersEdit"
+      
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id del usuario para editar"
+        required: true
+        type: "integer"
+        format: "int64"
+      
+      responses:
+        200:
+          description: OK
+        400:
+          description: "Id invalida"
+        405:
+          description: "Los datos no son validos"
+          
+  
+    post:
+      tags:
+      - "admin"
+      summary: "El administrador edita un usuario por id"
+      description: ""
+      operationId: "postUsersEdit"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id del usuario para editar"
+        required: true
+        type: "integer"
+        format: "int64"
+      
+      - name: "name"
+        in: "formData"
+        description: "Actualizar nombre del usuario"
+        required: true
+        type: "string"
+      
+      - name: "lastname"
+        in: "formData"
+        description: "Actualizar apellido del usuario"
+        required: true
+        type: "string"
+      
+      - name: "password"
+        in: "formData"
+        description: "Actualizar contraseña del usuario"
+        required: true
+        type: "string"
+      
+      responses:
+        200:
+          description: OK
+        
+        405:
+          description: "Los datos no son validos"
+    
+    delete:
+      tags:
+      - "admin"
+      summary: "Borrar usuario"
+      description: ""
+      operationId: "getUsersDelete"
+      
+      parameters:
+      
+      - name: "id"
+        in: "path"
+        description: "id del usuario para borrar"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "usuario borrado con exito"
+        400:
+          description: "id invalida"
+        404:
+          description: "usuario no encontrado"
+      
+    
+  
+  /register:
+    post:
+      tags:
+      - "register"
+      summary: "Registrar usuario"
+      description: ""
+      operationId: "postRegister"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      
+      - name: "id"
+        in: "path"
+        description: "id del usuario para editar"
+        required: true
+        type: "integer"
+        format: "int64"
+      
+      - name: "name"
+        in: "formData"
+        description: "Introducir nombre del usuario"
+        required: true
+        type: "string"
+      
+      - name: "lastname"
+        in: "formData"
+        description: "Introducir apellido del usuario"
+        required: true
+        type: "string"
+        
+      - name: "email"
+        in: "formData"
+        description: "Introducir apellido del usuario"
+        required: true
+        type: "string"
+      
+      - name: "password"
+        in: "formData"
+        description: "Introducir contraseña del usuario"
+        required: true
+        type: "string"
+      responses:
+        default:
+          description: "successful operation"
+          
+    get:
+      tags:
+      - "register"
+      summary: "Registrar usuario"
+      description: ""
+      operationId: "getRegister"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id del usuario para editar"
+        required: true
+        type: "integer"
+        format: "int64"
+      
+      - name: "name"
+        in: "formData"
+        description: "Introducir nombre del usuario"
+        required: true
+        type: "string"
+      
+      - name: "lastname"
+        in: "formData"
+        description: "Introducir apellido del usuario"
+        required: true
+        type: "string"
+        
+      - name: "email"
+        in: "formData"
+        description: "Introducir apellido del usuario"
+        required: true
+        type: "string"
+      
+      - name: "password"
+        in: "formData"
+        description: "Introducir contraseña del usuario"
+        required: true
+        type: "string"
+      responses:
+        default:
+          description: "successful operation"
+  
+  /login:
+    post:
+      tags:
+      - "login"
+      summary: "Loguear usuario"
+      description: ""
+      operationId: "postLogin"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      
+      - name: "email"
+        in: "formData"
+        description: "Introducir apellido del usuario"
+        required: true
+        type: "string"
+      
+      - name: "password"
+        in: "formData"
+        description: "Introducir contraseña del usuario"
+        required: true
+        type: "string"
+      responses:
+        default:
+          description: "successful operation"
+          
+    get:
+      tags:
+      - "login"
+      summary: "Loguear usuario"
+      description: ""
+      operationId: "getLogin"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      
+      - name: "email"
+        in: "formData"
+        description: "Introducir apellido del usuario"
+        required: true
+        type: "string"
+      
+      - name: "password"
+        in: "formData"
+        description: "Introducir contraseña del usuario"
+        required: true
+        type: "string"
+      responses:
+        default:
+          description: "ok"
+       
+    
+     
+          
+ 
+  /logout:
+    get:
+      tags:
+      - "logout"
+      summary: "Salir de la sesion"
+      description: ""
+      operationId: "getLogout"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
+          
+          
+          
+          
+  /admin/products:
+    get:
+        tags:
+        - "admin"
+        summary: "mostrar todos los servicios registrados"
+        description: ""
+        
+        responses:
+          200:
+            description: OK
+  
+  /admin/products/add:
+  
+          
+    post:
+      tags:
+      - "register"
+      summary: "Añadir un nuevo servicio al sistema"
+      description: ""
+      operationId: "postProductAdd"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      
+      - name: "id"
+        in: "path"
+        description: "id del servicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      
+      - name: "name"
+        in: "formData"
+        description: "Introducir nombre del servicio"
+        required: true
+        type: "string"
+      
+      - name: "category_id"
+        in: "formData"
+        description: "Introducir categoria"
+        required: true
+        type: "string"
+        
+      - name: "image"
+        in: "formData"
+        description: "Introducir imagen destacada"
+        required: true
+        type: "string"
+      
+      - name: "price"
+        in: "formData"
+        description: "Introducir precio del servicio"
+        required: true
+        type: "integer"
+      
+      - name: "in_discount"
+        in: "formData"
+        description: "si el servicio esta en descuento"
+        required: true
+        type: "integer"
+        
+      - name: "discount"
+        in: "formData"
+        description: "El descuento del servicio"
+        required: true
+        type: "integer"
+      
+      - name: "content"
+        in: "formData"
+        description: "Introducir descripcion"
+        required: true
+        type: "string"
+        
+      responses:
+        default:
+          description: "successful operation"
+          
+    
+  
+  
+  /admin/product/{id}/edit:
+    get:
+        tags:
+        - "admin"
+        summary: "El administrador puede editar un usuario por el id"
+        description: ""
+        operationId: "getProductEdit"
+        
+        parameters:
+        - name: "id"
+          in: "path"
+          description: "id del servicio a editar"
+          required: true
+          type: "integer"
+          format: "int64"
+        
+        responses:
+          200:
+            description: OK
+          400:
+            description: "Id invalida"
+          405:
+            description: "Los datos no son validos"
+    
+    post:
+      tags:
+      - "admin"
+      summary: "El administrador edita un usuario por id"
+      description: ""
+      operationId: "postProductEdit"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/xml"
+      - "application/json"
+      
+      
+      parameters:
+      - name: "id"
+        in: "formData"
+        description: "Id del servicio"
+        required: true
+        type: "integer"
+        
+      - name: "name"
+        in: "formData"
+        description: "Introducir nombre del servicio"
+        required: true
+        type: "string"
+      
+      - name: "category_id"
+        in: "formData"
+        description: "Introducir categoria"
+        required: true
+        type: "string"
+        
+      - name: "image"
+        in: "formData"
+        description: "Introducir imagen destacada"
+        required: true
+        type: "string"
+      
+      - name: "price"
+        in: "formData"
+        description: "Introducir precio del servicio"
+        required: true
+        type: "integer"
+      
+      - name: "in_discount"
+        in: "formData"
+        description: "si el servicio esta en descuento"
+        required: true
+        type: "integer"
+        
+      - name: "discount"
+        in: "formData"
+        description: "El descuento del servicio"
+        required: true
+        type: "integer"
+      
+      - name: "content"
+        in: "formData"
+        description: "Introducir descripcion"
+        required: true
+        type: "string"
+      
+      responses:
+        200:
+          description: OK
+        
+        405:
+          description: "Los datos no son validos"
+          
+  /admin/categories:
+    get:
+      tags:
+      - "admin"
+      summary: "mostrar todas las categorias registradas"
+      description: ""
+      
+      responses:
+        200:
+          description: OK
+          
+          
+  /admin/category:
+    get:
+      tags:
+      - "admin"
+      summary: "El administrador puede crear una categoria por el id"
+      description: ""
+      operationId: "getHome"
+      
+      
+      
+      responses:
+        200:
+          description: OK
+        400:
+          description: "Id invalida"
+        405:
+          description: "Los datos no son validos"
+          
+  /admin/category/add:
+    post:
+      tags:
+      - "admin"
+      summary: "El administrador crea una categoria por id"
+      description: ""
+      operationId: "postCategoryAdd"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id de la categoria para editar"
+        required: true
+        type: "integer"
+        format: "int64"
+      
+      - name: "name"
+        in: "formData"
+        description: "Actualizar nombre de categoria"
+        required: true
+        type: "string"
+      
+      - name: "lastname"
+        in: "formData"
+        description: "Actualizar modulo de categoria"
+        required: true
+        type: "string"
+      
+      - name: "password"
+        in: "formData"
+        description: "Actualizar icono de categoria"
+        required: true
+        type: "string"
+      
+      responses:
+        200:
+          description: OK
+        
+        405:
+          description: "Los datos no son validos"
+          
+  
+  /admin/category/{id}/edit:
+    get:
+      tags:
+      - "admin"
+      summary: "El administrador puede editar una categoria por el id"
+      description: ""
+      operationId: "getCategoryEdit"
+      
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id de al categoria para editar"
+        required: true
+        type: "integer"
+        format: "int64"
+      
+      responses:
+        200:
+          description: OK
+        400:
+          description: "Id invalida"
+        405:
+          description: "Los datos no son validos"
+          
+  
+    post:
+      tags:
+      - "admin"
+      summary: "El administrador edita una categoria por id"
+      description: ""
+      operationId: "postCategoryEdit"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id de la categoria para editar"
+        required: true
+        type: "integer"
+        format: "int64"
+      
+      - name: "name"
+        in: "formData"
+        description: "Actualizar nombre de categoria"
+        required: true
+        type: "string"
+      
+      - name: "lastname"
+        in: "formData"
+        description: "Actualizar modulo de categoria"
+        required: true
+        type: "string"
+      
+      - name: "password"
+        in: "formData"
+        description: "Actualizar icono de categoria"
+        required: true
+        type: "string"
+      
+      responses:
+        200:
+          description: OK
+        
+        405:
+          description: "Los datos no son validos"
+    
+  /admin/category/{id}/delete:  
+    delete:
+      tags:
+      - "admin"
+      summary: "Borrar categoria"
+      description: ""
+      operationId: "getCategoryDelete"
+      
+      parameters:
+      
+      - name: "id"
+        in: "path"
+        description: "id de categoria para borrar"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "categoria borrado con exito"
+        400:
+          description: "id invalida"
+        404:
+          description: "usuario no encontrado"
+          
+  /admin/user/{id}/banned:
+    get:
+      tags:
+      - "admin"
+      summary: "El administrador puede activar o desactivar usuarios por el id"
+      description: ""
+      operationId: "getUserBanned"
+      
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id del usuario a banear"
+        required: true
+        type: "integer"
+        format: "int64"
+      
+      responses:
+        200:
+          description: OK
+        400:
+          description: "Id invalida"
+        405:
+          description: "Los datos no son validos"
+          
+  /admin/product/{id}/gallery/add:
+    post:
+      tags:
+      - "admin"
+      summary: "El administrador edita una categoria por id"
+      description: ""
+      operationId: "postProductGalleryAdd"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id del servicio que tendra galeria "
+        required: true
+        type: "integer"
+        format: "int64"
+      
+      - name: "product_id"
+        in: "formData"
+        description: "Id del servicio(llave foranea)"
+        required: true
+        type: "integer"
+      
+      - name: "file_path"
+        in: "formData"
+        description: "Ruta donde se guardara"
+        required: true
+        type: "string"
+      
+      - name: "file_name"
+        in: "formData"
+        description: "Nombre del archivo"
+        required: true
+        type: "string"
+      
+      responses:
+        200:
+          description: OK
+        
+        405:
+          description: "Los datos no son validos"
+          
+  /admin/product/{id}/gallery/{gid}/delete:
+    delete:
+      tags:
+      - "admin"
+      summary: "Borrar imagen"
+      description: ""
+      operationId: "getProductGalleryDelete"
+      
+      parameters:
+      
+      - name: "id"
+        in: "path"
+        description: "id de la imagen a borrar"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "imagen borrado con exito"
+        400:
+          description: "id invalida"
+        404:
+          description: "imagen no borrado"
+  
+  
