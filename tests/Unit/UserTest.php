@@ -119,40 +119,6 @@ class UserTest extends TestCase
     }
 
 
-
-
-    
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /*public function testBannedUser()
     {
         $u = User::findOrFail(3);

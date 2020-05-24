@@ -28,6 +28,17 @@
 	 		</div>
 	 		{!! Form::text('lastname', null, ['class' => 'form-control', 'required']) !!}
 	 	</div>
+<!-- para añair un rol
+		<label for="role" class="mtop16">Tipo de usuario:</label>
+	 	<div class="input-group">
+	 		 		<div class="input-group-prepend">
+	 			<div class="input-group-text" align="center"><i class="fas fa-user-tag"> </i></div>
+	 			
+	 			{{ Form::radio('role', '2', ['class'=>'form-control']) }} <span>Tutor</span>
+	 		</div>
+	 		
+	 	</div>
+--> 	
 
 
 	 	<label for="email" class="mtop16">Correo electrónico:</label>

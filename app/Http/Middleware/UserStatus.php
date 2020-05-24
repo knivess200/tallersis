@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure, Auth;
 
-class IsAdmin
+class UserStatus
 {
     /**
      * Handle an incoming request.
@@ -15,17 +15,10 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->role=="1"):
+        if(Auth::user()->status != "100"):
             return $next($request);
         else:
-            if(Auth::user()->role=="2"):
-                return redirect('/us');
-            else:
-                if(Auth::user()->role=="3"):
-                return redirect('/usua');
-                endif;
-            endif;
-            
+            return redirect('/logout');                       
         endif;
     }
 }

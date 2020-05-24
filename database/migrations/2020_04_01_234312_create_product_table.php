@@ -19,6 +19,9 @@ class CreateProductTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->integer('category_id');
+           // $table->integer('user_id')->nullable();// cambie esto---->>>
+          //  $table->unsignedInteger('users_id')->nullable();
+          //  $table->foreign('users_id')->references('id')->on('users');
             $table->string('image');
             $table->decimal('price', 11,2);
             $table->integer('in_discount');
@@ -26,6 +29,8 @@ class CreateProductTable extends Migration
             $table->text('content');
             $table->softDeletes();
             $table->timestamps();
+
+            
         });
     }
 

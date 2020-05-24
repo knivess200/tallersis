@@ -33,6 +33,7 @@
 					  	</div>
 					
 						{!! Form::text('name', null, ['class' => 'form-control']) !!}
+						{!! Form::hidden('user_id', '{{Auth::user()->id}}' ) !!}
 					</div>					
 				</div>
 				<div class="col-md-3">
@@ -43,6 +44,16 @@
 					    	</span>
 					  	</div>						
 						{!! Form::select('category', $cats, 0, ['class' => 'custom-select'])!!}
+					</div>
+				</div>
+				<div class="col-md-3">
+					<label for="title">user_id:</label>
+					<div class="input-group ">
+						<div class="input-group-prepend">
+					    	<span class="input-group-text" id="basic-addon1"><i class="far fa-keyboard"></i>
+					    	</span>
+					  	</div>						
+						{!! Form::text('user_id',Auth::user()->id )!!}
 					</div>
 				</div>
 

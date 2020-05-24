@@ -23,7 +23,7 @@
 			<table class="table table-striped mtop16">
 				<thead>
 					<tr>
-						<td>ID</td>
+						<td>ID </td>
 						<td>Imagen</td>
 						<td>Nombre</td>
 						<td>Categoria</td>

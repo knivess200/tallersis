@@ -37,7 +37,11 @@ class ConnectController extends Controller
     	else:
 
     		if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], true)):
-    			return redirect('/admin');
+                if(Auth::user()->status == "100"):
+                    return redirect('/logout');
+                else:
+    			    return redirect('/');
+                endif;
     		else:
     			return back()->with('message', 'Correo electronico o contraseña errónea')->with('typealert', 'danger');
     		endif;
@@ -88,8 +92,48 @@ class ConnectController extends Controller
     }
 
     public function getLogout(){
+        $status = Auth::user()->status;
+        Auth::logout();
+        if($status == "100"):
+            return redirect('/login')->with('message', 'Su usuario fue suspendido.')->with('typealert', 'danger');
+        else:          
+    	   return redirect('/');
+        endif;
+    }
 
-    	Auth::logout();
-    	return redirect('/');
+    public function getRecover(){
+
+        return view('connect.recover');
+    }
+
+    public function postRecover(Request $request){
+        $rules = [
+           
+            'email' => 'required|email',
+            
+        ];
+
+        $messages = [
+           
+            'email.required' => 'Su correo electrónico es requerido.',
+            'email.email' => 'El formato de su correo electrónico es invalido.',
+            
+            
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()):
+            return back()->withErrors($validator)->with('message', 'Se ha producido un error')->with('typealert', 'danger');
+        else:
+            $user = User::where('email', $request->input('email'))->count();
+            if($user == "1"):
+                $user = User::where('email', $request->input('email'))->first();
+                $data = ['name' => $user->name, 'email' => $user->email];
+                return view('emails.user_password_recover');
+            else:
+                return back()->with('message', 'Este correo electronico no existe')->with('typealert', 'danger');
+            endif;
+        endif;
+
     }
 }

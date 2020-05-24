@@ -19,10 +19,15 @@ Route::get('/', function () {
 Route::get('/us', function () {
     return view('usuario');
 });
+Route::get('/usua', function () {
+    return view('usuario');
+});
 
 //router Auth
 Route::get('/login', 'ConnectController@getLogin')->name('login');
 Route::post('/login', 'ConnectController@postLogin')->name('login');
+Route::get('/recover', 'ConnectController@getRecover')->name('recover');
+Route::post('/recover', 'ConnectController@postRecover')->name('recover');
 Route::get('/register', 'ConnectController@getRegister')->name('register');
 Route::post('/register', 'ConnectController@postRegister')->name('register');
 Route::get('/logout', 'ConnectController@getLogout')->name('logout');

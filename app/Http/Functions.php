@@ -13,7 +13,9 @@ function getModulesArray(){
 function getRoleUserArray($mode, $id){
 	$roles = [
 		'0' => 'Usuario Normal',//Productos
-		'1' => 'Administrador'
+		'1' => 'Administrador',
+		'2' => 'Tutor',
+		'3' => 'Cuidador',
 
 	];
 
