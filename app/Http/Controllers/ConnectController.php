@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Validator, Hash , Auth;
+use Validator, Hash , Auth, Mail;
+use App\Mail\UserSendRecover;
 use App\User;
+use Mailgun\Mailgun;
 
 class ConnectController extends Controller
 {
@@ -128,12 +130,23 @@ class ConnectController extends Controller
             $user = User::where('email', $request->input('email'))->count();
             if($user == "1"):
                 $user = User::where('email', $request->input('email'))->first();
-                $data = ['name' => $user->name, 'email' => $user->email];
-                return view('emails.user_password_recover');
+                $code = rand(100000, 999999);
+                $data = ['name' => $user->name, 'email' => $user->email, 'code' => $code];
+                $u = User::find($user->id);
+                $u->password_code = $code; 
+                if($u->save()):
+                Mail::to($user->email)->send(new UserSendRecover($data));
+                return redirect ('/reset?email='.$user->email)->with('message', 'Ingrese el codigo que le hemos enviado a su correo electronico')->with('typealert', 'danger');
+                endif;
             else:
                 return back()->with('message', 'Este correo electronico no existe')->with('typealert', 'danger');
             endif;
         endif;
 
+    }
+
+    public function getReset(Request $request){
+        $data = ['email' => $request->get('email')];
+        return view('connect.reset', $data);
     }
 }
