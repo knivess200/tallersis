@@ -69,7 +69,7 @@ class UserTest extends TestCase
             'email' => 'ceso@ceso.com',
             'password' => '123456789',
         ]);
-         $response->assertSessionHasErrors('nvame');
+         $response->assertSessionHasErrors('name');
 
     }
 
@@ -84,7 +84,7 @@ class UserTest extends TestCase
             'email' => 'ceso@ceso.com',
             'password' => '123456789',
         ]);
-         $response->assertSessionHasErrors('lastname');
+         $response->assertSessionHasErrors('lacstname');
 
     }
 
