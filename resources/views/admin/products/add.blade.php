@@ -33,7 +33,7 @@
 					  	</div>
 					
 						{!! Form::text('name', null, ['class' => 'form-control']) !!}
-						{!! Form::hidden('user_id', '{{Auth::user()->id}}' ) !!}
+						<!-- {!! Form::hidden('user_id', '{{Auth::user()->id}}' ) !!} -->
 					</div>					
 				</div>
 				<div class="col-md-3">
@@ -46,7 +46,7 @@
 						{!! Form::select('category', $cats, 0, ['class' => 'custom-select'])!!}
 					</div>
 				</div>
-				<div class="col-md-3">
+				<!--<div class="col-md-3">
 					<label for="title">user_id:</label>
 					<div class="input-group ">
 						<div class="input-group-prepend">
@@ -55,7 +55,7 @@
 					  	</div>						
 						{!! Form::text('user_id',Auth::user()->id )!!}
 					</div>
-				</div>
+				</div>-->
 
 				<div class="col-md-3">
 					<label for="title">Imagen Destaca:</label>

@@ -17,6 +17,7 @@ class IsAdmin
     {
         if(Auth::user()->role=="1"):
             return $next($request);
+           // return redirect('/admin');
         else:
             if(Auth::user()->role=="2"):
                 return redirect('/us');
