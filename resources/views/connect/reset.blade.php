@@ -11,7 +11,7 @@
 		</a>
 	</div>
 	<div class="inside">
-	 	{!! Form::open(['url' => '/recover']) !!}
+	 	{!! Form::open(['url' => '/reset']) !!}
 	 	<label for="email">Correo electrónico:</label>
 	 	<div class="input-group">
 	 		 		<div class="input-group-prepend">

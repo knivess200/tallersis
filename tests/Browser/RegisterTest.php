@@ -18,11 +18,12 @@ class RegisterTest extends DuskTestCase
     public function testRegister()
     {
         $this->browse(function (Browser $browser) {
+            $code = rand(100000, 999999);
             $browser->visit('http://tallersis.com/')
                     ->clickLink('Register')
                     ->type('name', 'Juan')
                     ->type('lastname', 'Rubin')
-                    ->type('email', 'Jucn@Rubin.com')
+                    ->type('email', $code.'manuel@Rubin.com')
                     ->type('password', '123456789')
                     ->type('cpassword', '123456789')
                     ->pause(1000)

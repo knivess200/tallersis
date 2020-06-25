@@ -79,7 +79,7 @@ class UserController extends Controller
 
         $u = User::findOrFail($id);
         if($u->status == "100"):
-            $u->status = "1";
+            $u->status = "0";
             $msg= "Usuario activo nuevamente";
         else:
             $u->status = "100";

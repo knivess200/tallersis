@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Validator, Hash , Auth, Mail;
+use Validator, Hash , Auth, Mail ,Str;
 use App\Mail\UserSendRecover;
+use App\Mail\UserSendNewPassword;
 use App\User;
 use Mailgun\Mailgun;
 
@@ -148,5 +149,43 @@ class ConnectController extends Controller
     public function getReset(Request $request){
         $data = ['email' => $request->get('email')];
         return view('connect.reset', $data);
+    }
+
+    public function postReset(Request $request){
+         $rules = [
+           
+            'email' => 'required|email',
+            'code' => 'required',
+            
+        ];
+
+        $messages = [
+           
+            'email.required' => 'Su correo electrónico es requerido.',
+            'email.email' => 'El formato de su correo electrónico es invalido.',
+            'code.required' => 'El codigo de recuperacion es requerido'
+            
+            
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()):
+            return back()->withErrors($validator)->with('message', 'Se ha producido un error')->with('typealert', 'danger');
+        else:
+            $user = User::where('email', $request->input('email'))->where('password_code', $request->input('code'))->count();
+            if($user == "1"):
+                $user = User::where('email', $request->input('email'))->where('password_code', $request->input('code'))->first();
+                $new_password = Str::random(8);
+                $user->password = Hash::make($new_password);
+                $user->password_code = null;
+                if ($user->save()):
+                    $data = ['name' => $user->name,'password' => $new_password ];
+                    Mail::to($user->email)->send(new UserSendNewPassword($data));
+                    return redirect ('/login')->with('message', 'La contraseña fue reestrablecida con exito, le hemos enviado un correo electronico con su nueva contraseña para que pueda iniciar sesion')->with('typealert', 'success');
+                endif;
+            else:
+                return back()->with('message', 'El  correo electronico o codigo de recuperacion son erroneos')->with('typealert', 'danger');
+            endif;
+        endif;
     }
 }
